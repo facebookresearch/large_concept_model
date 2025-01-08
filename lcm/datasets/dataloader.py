@@ -184,14 +184,27 @@ class LCMDataLoader(DataLoader[LCMInput, ParquetDatasetConfig], Stateful):
             "name": batch[ColumnsNames.dataset_name.value],
             "batch": batch,
         }
+        # Convert each embedding to torch Tensor
         for key, col in possible_emb_columns.items():
             col_name = col.value
             if col_name in batch:
                 dtype = self.dtype if "_length" not in key else torch.int64
-                embs = [x.to(self.gang.device).to(dtype) for x in batch[col_name]]
-                # Special case when some embeddings are not shaped as (T, D) e.g., XLMC's answer columns
-                if embs[0].dim() == 1 and "_length" not in key:
-                    embs = [t.unsqueeze(0) for t in embs]
+                # We check if `x` is a pyarrow.Scalar; if so, convert it to a Python object.
+                embs = []
+                for x in batch[col_name]:
+                    if isinstance(x, torch.Tensor):
+                        # Already a tensor, just ensure correct device/dtype
+                        t = x.to(device=self.gang.device, dtype=dtype)
+                    elif isinstance(x, pa.Scalar):
+                        # Convert PyArrow scalar to Python float/int
+                        t = torch.tensor(x.as_py(), device=self.gang.device, dtype=dtype)
+                    else:
+                        # Convert list / numpy array / etc. to tensor
+                        t = torch.tensor(x, device=self.gang.device, dtype=dtype)
+                    # If 1D but should be 2D, e.g. (D) -> (1, D), handle here if needed
+                    if t.dim() == 1 and "_length" not in key:
+                        t = t.unsqueeze(0)
+                    embs.append(t)
             else:
                 embs = None
             outputs[key] = embs
