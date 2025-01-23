@@ -87,8 +87,9 @@ def run(output_dir: Path):
         cache=None,
         cluster="local",
         # for SLURM you can set some parameters of the launcher here
+        # cluster="slurm",
         # update_parameters={
-        #    "slurm_partition": "YOURPARTITION",
+        #    "partition": "learn",
         # },
     )
 

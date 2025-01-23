@@ -3,7 +3,7 @@
 #
 #
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Tuple
 
 import torch
@@ -33,7 +33,9 @@ class TowerDiffusionLCMCriterionConfig(LCMCriterionConfig):
        Note that this requires the model to be set with
        `trained_with_cf_guidance = True`!
     """
-    step_sampling: StepsSamplerConfig = StepsSamplerConfig()
+    step_sampling: StepsSamplerConfig = field(
+        default_factory=lambda: StepsSamplerConfig()
+    )
 
     log_losses_per_timestep_bucket: bool = False
 

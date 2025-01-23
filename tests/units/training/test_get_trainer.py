@@ -23,7 +23,7 @@ class Foo:
 @dataclass
 class Config:
     foobar: str = "test"
-    cfg: Foo = Foo()
+    cfg: Foo = field(default_factory=lambda: Foo())
     c: float = field(init=False)
 
     def __post_init__(self):

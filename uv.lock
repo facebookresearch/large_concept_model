@@ -3275,7 +3275,7 @@ wheels = [
 
 [[package]]
 name = "stopes"
-version = "2.2.0"
+version = "2.2.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "hydra-core" },
@@ -3285,9 +3285,9 @@ dependencies = [
     { name = "submitit" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/23/fe/15f6f3d8cd22b316c30a354e3cddf97ee3fd597286bb608bbc787565340e/stopes-2.2.0.tar.gz", hash = "sha256:40928ab95b1371f64358308e47f7f46c46844c73a4d7c0cfd0d91aab33b6e9f9", size = 3297841 }
+sdist = { url = "https://files.pythonhosted.org/packages/b4/f6/fa510377300ea915ee2b89db55978eb363ce1fb488ac356325a0339ca0bd/stopes-2.2.1.tar.gz", hash = "sha256:0c8b039c98555a33c140d2173e9b0a1fc26318f7ac5102161b8822fc87869159", size = 3295748 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a4/ea/ac1fd781fcb763f75f7baab5f865a0315df6956b21a012f3bec6c9948b50/stopes-2.2.0-py3-none-any.whl", hash = "sha256:4d6d3e60662fd66550737ccab11e61b0f802c5c0f94b1797ea88de463f094c83", size = 1647683 },
+    { url = "https://files.pythonhosted.org/packages/6a/8a/9a24f7f4a7f26e883094738a156d7ce64e5c229d109ec838343da131d440/stopes-2.2.1-py3-none-any.whl", hash = "sha256:edf258d46f4471459c7164b1d78d432ae350447d751c78b3b1cf76742857421f", size = 1647727 },
 ]
 
 [package.optional-dependencies]
